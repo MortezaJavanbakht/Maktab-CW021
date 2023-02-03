@@ -1,1 +1,8 @@
+.bodyContainer {
+  display: flex;
+  justify-content: space-evenly;
+}
 
+.mainContainer {
+  text-align: center;
+}

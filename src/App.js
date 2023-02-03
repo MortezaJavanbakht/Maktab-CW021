@@ -4,6 +4,7 @@ import "./App.css";
 import { createContext } from "react";
 import UserList from "./Components/userList/UserList";
 import { requests } from "./scripts/request";
+import EditUser from "./Components/EditUser/EditUser";
 
 export const UsersContext = createContext();
 
@@ -15,13 +16,17 @@ function App() {
   }, []);
 
   return (
-    <>
+    <div className="mainContainer">
       <UsersContext.Provider
         value={{ allUsers, setAllUsers, edituser, setEditUser }}
       >
-        <UserList />
+        <h1>React CRUD App with Hooks</h1>
+        <div className="bodyContainer">
+          <EditUser />
+          <UserList />
+        </div>
       </UsersContext.Provider>
-    </>
+    </div>
   );
 }
 

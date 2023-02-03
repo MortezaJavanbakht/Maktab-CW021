@@ -1,41 +1,41 @@
-.form-editUser{
-    display: flex;
-    flex-direction: column;
-    width: 300px;
-    padding: 10px;
-    gap: 8px;
+.form-editUser {
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+  padding: 10px;
+  gap: 8px;
 }
-.form-btn{
-    display: flex;
-    flex-direction: row;
-    padding-top: 10px;
-    gap: 5px;
+.form-btn {
+  display: flex;
+  flex-direction: row;
+  padding-top: 10px;
+  gap: 5px;
 }
 .invalid {
-    border : 1px #b40e0e solid;
-    background-color: #fddddd;
+  border: 1px #b40e0e solid;
+  background-color: #fddddd;
 }
-.f-btn{
-    padding: 7px;
-    outline: none;
-    border: none;
-    cursor: pointer;
-    border-radius: 5px;
+.f-btn {
+  padding: 7px;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
 }
-.f-btn:hover{
-    opacity: 0.7;
+.f-btn:hover {
+  opacity: 0.7;
 }
-input{
-    padding: 10px;
-    outline: none;
-    border: none;
-    border: 1px solid #000;
+input {
+  padding: 10px;
+  outline: none;
+  border: none;
+  border: 1px solid #000;
 }
-.error-text{
-    color: #b40e0e;
-    font-size: 10px;
+.error-text {
+  color: #b40e0e;
+  font-size: 10px;
 }
-.container{
-    width: 320px;
-    background-color: whitesmoke;
+.container {
+  width: 320px;
+  /* background-color: whitesmoke; */
 }
