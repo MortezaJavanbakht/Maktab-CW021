@@ -1,25 +1,30 @@
 import React ,{useState} from 'react';
+import { useContext } from 'react';
+import { UsersContext } from '../../App';
 import "./EditUser.css";
+import { requests } from '../../scripts/request';
 
 const EditUser = () => {
 
-    const [enteredName , setEnteredName] = useState('');
-    const [enteredUsername ,setEnteredUsername] = useState("")
+    // const [enteredName , setEnteredName] = useState('');
+    // const [enteredUsername ,setEnteredUsername] = useState("")
     const [tochNameIsValid , setTochNameIsValid] = useState(false)
     const [tochUsernameIsValid , setTochUsernameIsValid] = useState(false)
-
-
-    const nameIsValid = enteredName.trim() !== '';
+    
+    
+    const userContext = useContext(UsersContext)
+    const editUserInfo = userContext.edituser
+    const nameIsValid = editUserInfo.name?.trim() !== '';
     const inputIsValided = !nameIsValid && tochNameIsValid;
-    const usernameIsValid = enteredUsername.trim() !== '';
+    const usernameIsValid = editUserInfo.username?.trim() !== '';
     const userInputIsValid = !usernameIsValid && tochUsernameIsValid;
 
-    const changeInputHandler =(e) =>{
-        setEnteredName(e.target.value);
-    }
-    const changeInputUserHandler =(e) => {
-        setEnteredUsername(e.target.value)
-    }
+    // const changeInputHandler =(e) =>{
+    //     setEnteredName(e.target.value);
+    // }
+    // const changeInputUserHandler =(e) => {
+    //     setEnteredUsername(e.target.value)
+    // }
 
     const blurInputChangeHandler = () => {
         setTochNameIsValid(true)
@@ -39,10 +44,12 @@ const EditUser = () => {
         if(!usernameIsValid){
             return;
         }
-        console.log(enteredName)
-        console.log(enteredUsername)
-        setEnteredName("")
-        setEnteredUsername("")
+        // console.log(enteredName)
+        // console.log(enteredUsername)
+        requests.edit(userContext.setAllUsers, editUserInfo.id, editUserInfo)
+        userContext.setEditUser({ name: "", username: ""})
+        // setEnteredName("")
+        // setEnteredUsername("")
         setTochNameIsValid(false)
         setTochUsernameIsValid(false)
     }
@@ -50,23 +57,25 @@ const EditUser = () => {
     const nameInputClasses = inputIsValided ? "invalid" : ""
     const usernameInputClasses = userInputIsValid ? "invalid" : ""
 
+
     return (
         <div className="container">
+            <h2>Edit user</h2>
             <form className="form-editUser"  onSubmit={formSubmissionHandler}>
                 <label htmlFor="user">Name</label>
                 <input type="text"
                        name="user"
                        id="user"
-                       onChange={changeInputHandler}
-                       value={enteredName}
+                       onChange={(e)=>userContext.setEditUser({...editUserInfo, name: e.target.value})}
+                       value={editUserInfo.name}
                        onBlur={blurInputChangeHandler}
                        className={nameInputClasses}
                 />
                 {inputIsValided && <p className="error-text">name must not be empty.</p>}
                 <label htmlFor="username">UserName</label>
                 <input
-                    value={enteredUsername}
-                    onChange={changeInputUserHandler}
+                    value={editUserInfo.username}
+                    onChange={(e)=>userContext.setEditUser({...editUserInfo, username: e.target.value})}
                     onBlur={blurInputUserChangeHandler}
                     name="username"
                     id="username"
@@ -76,7 +85,7 @@ const EditUser = () => {
                 {userInputIsValid && <p className="error-text">userName must not be empty.</p>}
                 <div className="form-btn">
                 <button type="submit" className="f-btn" style={{backgroundColor:"#37C2E7", color:"white"}}>Edit User</button>
-                <button type="submit" className="f-btn">Cancel</button>
+                <button className="f-btn" onClick={(e)=>{e.preventDefault(); userContext.setEditUser({ name: "", username: ""});}}>Cancel</button>
                 </div>
             </form>
         </div>
